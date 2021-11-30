@@ -43,6 +43,7 @@ api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__':
     from db import db, get_connection
+    print(get_connection())
     app.config['SQLALCHEMY_DATABASE_URI'] = get_connection()
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
