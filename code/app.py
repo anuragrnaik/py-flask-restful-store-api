@@ -2,7 +2,6 @@ from datetime import timedelta
 from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt import JWT
-from db import db
 
 from security import authenticate, identity
 
@@ -21,10 +20,6 @@ app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800)
 # app.config['JWT_AUTH_USERNAME_KEY'] = 'email'
 
 api = Api(app)
-
-@app.before_first_request
-def create_tables():
-    db.create_all()
 
 jwt = JWT(app, authenticate, identity)
 
@@ -49,5 +44,6 @@ api.add_resource(StoreList, '/stores')
 api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__':
+    from db import db
     db.init_app(app)
     app.run(port=5000, debug=True)
