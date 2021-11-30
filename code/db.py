@@ -5,7 +5,6 @@ db = SQLAlchemy()
 
 def get_connection():
     db_uri = os.getenv('DATABASE_URL', 'sqlite:///data.db')
-    print(db_uri)
     if db_uri and db_uri.startswith("postgres://"):
         db_uri = db_uri.replace("postgres://", "postgresql://", 1)
     return db_uri
