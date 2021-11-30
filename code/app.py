@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 db_conn = os.getenv('DATABASE_URL', 'sqlite:///data.db')  # or other relevant config var
 if db_conn.startswith("postgres://"):
-    uri = db_conn.replace("postgres://", "postgresql://", 1)
+    db_conn = db_conn.replace("postgres://", "postgresql://", 1)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = db_conn
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
